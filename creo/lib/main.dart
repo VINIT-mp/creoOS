@@ -1,110 +1,39 @@
-import 'package:creo/calculator.dart';
-import 'package:creo/contacts.dart';
-import 'package:creo/messagesApp.dart';
-import 'package:creo/phoneLog.dart';
-import 'package:creo/unlock.dart';
+import 'package:creo/screens/calculator.dart';
+import 'package:creo/screens/contacts.dart';
+import 'package:creo/helpers%20/helpers.dart';
+import 'package:creo/screens/messagesApp.dart';
+import 'package:creo/screens/phoneLog.dart';
+import 'package:creo/screens/unlock.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  runApp(const CreoItMain());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class CreoItMain extends StatelessWidget {
+  const CreoItMain({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+    return const MaterialApp(
       home: LollipopHomeScreen(),
     );
   }
 }
 
-class App {
-  final String name;
-  final IconData icon;
-
-  App(this.name, this.icon);
-}
-
-Route _createRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const MyWidget(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
-}
-
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final List<App> apps = [
-      App('Phone', Icons.phone),
-      App('Messages', Icons.message),
-      App('Contacts', Icons.contacts),
-      // Add more apps here
-    ];
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4, // Adjust the number of columns as needed
-        mainAxisSpacing: 8.0,
-        crossAxisSpacing: 8.0,
-      ),
-      itemCount: apps.length,
-      itemBuilder: (BuildContext context, int index) {
-        return GestureDetector(
-          onTap: () {
-            // Handle app tap here
-          },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              CircleAvatar(
-                radius: 30.0,
-                backgroundColor: Colors.blue,
-                child: Icon(apps[index].icon, color: Colors.white),
-              ),
-              Text("${apps[index].name}"),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////
-///
-///
-
 class LollipopHomeScreen extends StatefulWidget {
   const LollipopHomeScreen({super.key});
 
   @override
-  _LollipopHomeScreenState createState() => _LollipopHomeScreenState();
+  LollipopHomeScreenState createState() => LollipopHomeScreenState();
 }
 
-class _LollipopHomeScreenState extends State<LollipopHomeScreen> {
-  int _currentIndex = 2;
+class LollipopHomeScreenState extends State<LollipopHomeScreen> {
+  int currentIndex = 2;
   bool flick = false;
   bool visible = true;
   bool start = false;
@@ -120,23 +49,29 @@ class _LollipopHomeScreenState extends State<LollipopHomeScreen> {
   void initState() {
     start = true;
     super.initState();
+    initialization();
+  }
+
+  void initialization() async {
+    await Future.delayed(const Duration(seconds: 3));
+    FlutterNativeSplash.remove();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: flick && _currentIndex == 2
-            ? UnlockScreen()
-            : _screens[_currentIndex],
+        body: flick && currentIndex == 2
+            ? const UnlockScreen()
+            : _screens[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.transparent,
-          selectedItemColor: Colors.blue,
+          selectedItemColor: Color.fromARGB(255, 140, 195, 240),
           unselectedItemColor: Colors.black54,
-          currentIndex: _currentIndex,
+          currentIndex: currentIndex,
           onTap: (int index) {
             start = false;
             setState(() {
-              _currentIndex = index;
+              currentIndex = index;
 
               if (index == 2) {
                 flick = !flick;
@@ -148,31 +83,31 @@ class _LollipopHomeScreenState extends State<LollipopHomeScreen> {
               icon: Icon(
                 Icons.phone,
               ),
-              label: 'Phone',
+              label: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.calculate,
               ),
-              label: 'Calculator',
+              label: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.apps,
               ),
-              label: 'All Apps',
+              label: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.message,
               ),
-              label: 'Messages',
+              label: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.contacts,
               ),
-              label: 'Contacts',
+              label: '',
             ),
           ],
         ));
@@ -184,16 +119,24 @@ class AllAppsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<App> apps = [
-      App('Calculator', Icons.calculate),
-      App('Messages', Icons.calendar_today),
-      App('Calender', Icons.camera),
-      App('Photos', Icons.browser_not_supported_outlined),
-      App('Contacts', Icons.contacts),
-      App('Downloads', Icons.download),
-      App('Mail', Icons.mail),
-      App('Phone', Icons.photo_camera),
-      App('Contacts', Icons.phone),
+    final List<AppsInAllApps> apps = [
+      AppsInAllApps('Calculator', Icons.calculate),
+      AppsInAllApps('Messages', Icons.message),
+      AppsInAllApps('Calender', Icons.camera),
+      AppsInAllApps('Photos', Icons.browser_not_supported_outlined),
+      AppsInAllApps('Contacts', Icons.contacts),
+      AppsInAllApps('Downloads', Icons.download),
+      AppsInAllApps('Mail', Icons.mail),
+      AppsInAllApps('Camera', Icons.photo_camera),
+      AppsInAllApps('Phone', Icons.phone),
+      AppsInAllApps("Settings", Icons.settings),
+      AppsInAllApps("Drive", Icons.add_to_drive_outlined),
+      AppsInAllApps("Maps", Icons.map_outlined),
+      AppsInAllApps("GoogleTranslate", Icons.g_translate_rounded),
+      AppsInAllApps("Play Books", Icons.play_lesson),
+      AppsInAllApps("Files", Icons.drive_file_move_sharp),
+
+      AppsInAllApps("Tinder", Icons.whatshot)
 
       // Add more apps here
     ];
@@ -218,7 +161,21 @@ class AllAppsScreen extends StatelessWidget {
           itemCount: apps.length,
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
-              onTap: () {},
+              onTap: () {
+                if (index == 4) {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ContactsApp()));
+                } else if (index == 0) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => CalculatorScreen()));
+                } else if (index == 1) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const MessagesApp()));
+                } else if (index == 8) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => PhoneAppScreen()));
+                }
+              },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -226,11 +183,14 @@ class AllAppsScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 30.0,
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Color.fromARGB(0, 180, 175, 175),
                     child: Icon(apps[index].icon, color: Colors.white),
                   ),
                   Center(
-                    child: Text(apps[index].name),
+                    child: Text(
+                      apps[index].name,
+                      style: TextStyle(color: Colors.grey[300]),
+                    ),
                   )
                 ],
               ),

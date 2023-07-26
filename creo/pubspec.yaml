@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_native_splash: ^2.2.19
   math_expressions: ^2.4.0
+  permission_handler: ^10.4.3
 
 dev_dependencies:
   flutter_test:
@@ -91,3 +92,18 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/creo.jpeg
+  branding: assets/creo.jpeg
+  color_dark: "#121212"
+  image_dark: assets/creo.jpeg
+  branding_dark: assets/creo.jpeg
+
+  android_12:
+    image: assets/creo.jpeg
+    icon_background_color: "#ffffff"
+    image_dark: assets/creo.jpeg
+    icon_background_color_dark: "#121212"
+
+  web: false

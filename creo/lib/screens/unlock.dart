@@ -27,12 +27,6 @@ class _UnlockScreenState extends State<UnlockScreen> {
     });
   }
 
-  void _unlockScreen() {
-    setState(() {
-      _isUnlocked = true;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,8 +46,7 @@ class WallpaperBackground extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-              'assets/lollipop.jpg'), // Replace with your wallpaper image
+          image: AssetImage('assets/lollipop.jpg'),
           fit: BoxFit.cover,
         ),
       ),
@@ -76,7 +69,7 @@ class HomeIcons extends StatelessWidget {
             timeString,
             style: const TextStyle(
               fontSize: 60.0,
-              color: Colors.black,
+              color: Color.fromARGB(255, 56, 55, 55),
               fontWeight: FontWeight.bold,
             ),
           ),
