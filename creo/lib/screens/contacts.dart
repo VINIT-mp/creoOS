@@ -19,6 +19,7 @@ class ContactsScreen extends StatefulWidget {
 }
 
 class _ContactsScreenState extends State<ContactsScreen> {
+  final textControl = TextEditingController();
   List<String> _contacts = [
     "John Doe",
     "Jane Smith",
@@ -90,3 +91,11 @@ class _ContactsScreenState extends State<ContactsScreen> {
     );
   }
 }
+
+// class ApiCalls {
+//   void fetchData() async {
+
+
+//     await response = 
+//   }
+// }

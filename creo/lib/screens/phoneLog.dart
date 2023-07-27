@@ -30,13 +30,11 @@ class PhoneAppScreen extends StatelessWidget {
   }
 
   Widget _buildRecentCallsList() {
-    // Replace this with your data source for recent calls
     List<String> recentCalls = [
       "John Doe",
       "Jane Smith",
       "Michael Johnson",
       "Emma Lee",
-      // Add more recent calls here
     ];
 
     return ListView.builder(
@@ -44,14 +42,12 @@ class PhoneAppScreen extends StatelessWidget {
       itemBuilder: (context, index) {
         return ListTile(
           leading: CircleAvatar(
-            // Replace this with contact's avatar or call icon
             child: Icon(Icons.phone),
           ),
           title: Text(recentCalls[index]),
-          subtitle: Text('Today, 10:30 AM'), // Replace this with call time
+          subtitle: Text('Today, 10:30 AM'), 
           trailing: Icon(Icons.call),
           onTap: () {
-            // Implement call details page navigation
           },
         );
       },

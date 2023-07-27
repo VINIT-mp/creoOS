@@ -23,8 +23,30 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       } else if (buttonText == 'C') {
         _expression = '';
         _result = '';
-      } else {
+      } else if (buttonText == '+') {
         _expression += buttonText;
+      } else if (buttonText == 'x') {
+        int? expressionHolder = int.tryParse(_expression);
+        int? buttonTextHoler = int.tryParse(buttonText);
+        if (expressionHolder != null) {
+          expressionHolder *= buttonTextHoler!;
+          _result = _evaluateExpression(expressionHolder.toString());
+        } else {}
+      } else if (buttonText == '/') {
+        double? expressionHolder = double.tryParse(_expression);
+        double? buttonTextHoler = double.tryParse(buttonText);
+
+        if (expressionHolder != null && expressionHolder != 0) {
+          expressionHolder /= buttonTextHoler!;
+          _result = _evaluateExpression(expressionHolder.toString());
+        } else {}
+      } else if (buttonText == '-') {
+        int? expressionHolder = int.tryParse(_expression);
+        int? buttonTextHoler = int.tryParse(buttonText);
+        if (expressionHolder != null && expressionHolder >= buttonTextHoler!) {
+          expressionHolder -= buttonTextHoler;
+          _result = _evaluateExpression(expressionHolder.toString());
+        } else {}
       }
     });
   }
