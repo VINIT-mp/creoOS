@@ -11,6 +11,7 @@ class CalculatorScreen extends StatefulWidget {
 class _CalculatorScreenState extends State<CalculatorScreen> {
   String _expression = '';
   String _result = '';
+//hell
 
   void _onButtonPressed(String buttonText) {
     setState(() {
@@ -59,17 +60,19 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       double eval = exp.evaluate(EvaluationType.REAL, cm);
       return eval.toString();
     } catch (e) {
+      print(e);
       return 'Error';
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    String value = "hi";
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            var something1 = Navigator.pop(context, value);
           },
           icon: const Icon(
             Icons.arrow_back_ios_new,
