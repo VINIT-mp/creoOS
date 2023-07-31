@@ -1,4 +1,4 @@
-import 'package:creo/screens/calculator.dart';
+import 'package:creo/views/calculator.dart';
 import 'package:creo/main.dart';
 import 'package:flutter/material.dart';
 

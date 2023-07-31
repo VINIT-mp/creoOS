@@ -1,9 +1,9 @@
-import 'package:creo/screens/calculator.dart';
-import 'package:creo/screens/contacts.dart';
+import 'package:creo/views/calculator.dart';
+import 'package:creo/views/contacts.dart';
 import 'package:creo/helpers%20/helpers.dart';
-import 'package:creo/screens/messagesApp.dart';
-import 'package:creo/screens/phoneLog.dart';
-import 'package:creo/screens/unlock.dart';
+import 'package:creo/views/messagesApp.dart';
+import 'package:creo/views/phoneLog.dart';
+import 'package:creo/views/unlock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
