@@ -20,7 +20,7 @@ class ContactsScreen extends StatefulWidget {
 
 class _ContactsScreenState extends State<ContactsScreen> {
   final textControl = TextEditingController();
-  List<String> _contacts = [
+  final List<String> _contacts = [
     "John Doe",
     "Jane Smith",
     "Michael Johnson",
@@ -48,7 +48,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contacts'),
+        title: const Text('Contacts'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

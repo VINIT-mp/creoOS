@@ -1,5 +1,3 @@
-import 'package:creo/views/calculator.dart';
-import 'package:creo/main.dart';
 import 'package:flutter/material.dart';
 
 class MessagesApp extends StatelessWidget {
@@ -7,13 +5,15 @@ class MessagesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: ChatScreen(),
     );
   }
 }
 
 class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
